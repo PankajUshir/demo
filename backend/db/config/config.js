@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: '../.env' })
 
 const config = {
     development: {
@@ -24,4 +24,4 @@ const config = {
     },
 }
 
-module.exports = { config }
+module.exports = config
