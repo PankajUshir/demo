@@ -5,6 +5,6 @@ set NODE_ENV=production
 
 For migration : cd .\db\
 npx sequelize-cli db:migrate
-npx sequelize-cli db:migrate:undo
+npx sequelize-cli db:migrate:undo:all
 npx sequelize-cli db:seed:all
 npx sequelize-cli db:seed:undo:all
