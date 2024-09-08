@@ -1,8 +1,12 @@
 const express = require('express')
 require('dotenv').config()
-const logger = require('./src/common/logger')
+const logger = require('./common/logger')
+const router = require('./routes')
 const { sequelize } = require('./db/config/sequelize')
+const models = require('./db/models')
 const app = express()
+
+app.use('/', router)
 
 const port = process.env.PORT
 
