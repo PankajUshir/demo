@@ -4,9 +4,12 @@ const logger = require('./common/logger')
 const router = require('./routes')
 const { sequelize } = require('./db/config/sequelize')
 const models = require('./db/models')
+const bodyParser = require('body-parser')
 const app = express()
 
 app.use('/', router)
+app.use(express.json())
+app.use(bodyParser)
 
 const port = process.env.PORT
 
@@ -15,7 +18,7 @@ sequelize
     .then(() => {
         app.listen(port, () => {
             logger.info(
-                `Connection has been established successfully on ${new Date()}`
+                `Database Connection has been established successfully on ${new Date()}`
             )
             logger.info(`Server Running at ${port} on ${new Date()}`)
         })
