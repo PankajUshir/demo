@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
-const config = require('../db/config/config')
-const { sendUnauthorized } = require('../utils/response')
+const constant = require('../common/constant')
+const { sendUnauthorized, sendResponse } = require('../utils/response')
 
 const authenticateToken = (req, res, next) => {
     const token = req.headers['authorization']
@@ -9,7 +9,7 @@ const authenticateToken = (req, res, next) => {
         return sendUnauthorized(res)
     }
 
-    jwt.verify(token, config.auth.secretKey, (err, user) => {
+    jwt.verify(token, constant.auth.jwtSecretKey, (err, user) => {
         if (err) {
             return sendResponse(res, 403, { message: 'Forbidden' })
         }
