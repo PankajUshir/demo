@@ -4,12 +4,11 @@ const logger = require('./common/logger')
 const router = require('./routes')
 const { sequelize } = require('./db/config/sequelize')
 const models = require('./db/models')
-const bodyParser = require('body-parser')
 const app = express()
 
-app.use('/', router)
 app.use(express.json())
-app.use(bodyParser)
+app.use(express.urlencoded({ extended: true }))
+app.use('/', router)
 
 const port = process.env.PORT
 
