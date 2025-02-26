@@ -9,9 +9,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            username: {
-                type: Sequelize.STRING,
-            },
             email: {
                 allowNull: false,
                 type: Sequelize.STRING,
@@ -32,10 +29,11 @@ module.exports = {
             last_login: {
                 allowNull: true,
                 type: Sequelize.DATE,
+                defaultValue: new Date(),
             },
             status: {
                 allowNull: false,
-                type: Sequelize.DATE,
+                type: Sequelize.BOOLEAN,
             },
             created_at: {
                 allowNull: true,

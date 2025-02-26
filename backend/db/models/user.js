@@ -19,9 +19,6 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            username: {
-                type: DataTypes.STRING,
-            },
             email: {
                 allowNull: false,
                 type: DataTypes.STRING,
@@ -42,10 +39,11 @@ module.exports = (sequelize, DataTypes) => {
             last_login: {
                 allowNull: true,
                 type: DataTypes.DATE,
+                defaultValue: new Date(),
             },
             status: {
                 allowNull: false,
-                type: DataTypes.DATE,
+                type: DataTypes.BOOLEAN,
             },
             created_at: {
                 allowNull: true,

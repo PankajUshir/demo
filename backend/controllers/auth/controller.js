@@ -1,7 +1,9 @@
 const { Router } = require('express')
 const { sendResponse, handleServerError } = require('../../utils/response')
 const router = Router()
-const User = require('../../db/models/user')
+const { User } = require('../../db/models/user')
+const bcrypt = require('bcrypt')
+const constant = require('../../common/constant')
 
 async function loginHandler(req, res, next) {
     try {
@@ -34,19 +36,30 @@ async function loginHandler(req, res, next) {
 }
 
 async function signupHandler(req, res, next) {
-    const userData = req.body
-    if (!userData.email || !userData.password)
+    const { email, password, first_name, last_name, phone_number } = req.body
+    if (!email || !password)
         return res
             .status(400)
             .json({ error: 'email and password are required' })
 
-    const userById = await userService.getUserById(userData.email)
+    // const userById = await userService.getUserById(email)
 
-    if (userById) {
-        return res.status(400).json({ message: 'User is already exist' })
+    // if (userById) {
+    //     return res.status(400).json({ message: 'User is already exist' })
+    // }
+
+    const userData = {
+        email: email,
+        password_hash: await bcrypt.hash(password, constant.auth.saltRounds),
+        first_name: first_name,
+        last_name: last_name,
+        phone_number: phone_number,
+        last_login: null,
+        status: true,
+        created_at: new Date(),
     }
 
-    const newUser = await userService.createUser(userData)
+    await User.create(userData)
     return res.status(201).json({ message: 'User Created Successfully' })
 }
 
